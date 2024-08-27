@@ -1,31 +1,92 @@
 import { FixedSizeGrid } from 'react-window'
 
-import { Trade } from '@/types/types'
+import styles from './List.module.css'
 
-const Cell = ({ columnIndex, rowIndex, style, data }) => {
-  const row = data[rowIndex][columnIndex]
+type GridArray = (string | number)[][]
 
-  return <div style={style}>{row}</div>
+type CellProps = {
+  columnIndex: number
+  rowIndex: number
+  style: {
+    position: string
+    left: number
+    top: number
+    height: number
+    width: number
+  }
+  data: GridArray
 }
 
-const List = ({ gridRef, items }: { gridRef: any; items: (string | number)[][] }) => {
+const Cell = ({ columnIndex, rowIndex, style, data }: CellProps) => {
+  const row = data[rowIndex][columnIndex]
+
+  return (
+    <div
+      className={`
+        ${styles.allCells}
+        ${rowIndex % 2 ? styles.gridItemOdd : styles.gridItemEven}
+        ${columnIndex === data[rowIndex].length - 1 ? styles.lastColumn : ''}
+      `}
+      style={style}
+    >
+      {row}
+    </div>
+  )
+}
+
+const Header = ({ columnIndex, rowIndex, style, data }: CellProps) => {
+  const header = data[rowIndex][columnIndex]
+
+  return (
+    <div
+      className={`
+        ${styles.allCells}
+        ${rowIndex === 0 ? styles.headers : ''}
+      `}
+      style={style}
+    >
+      {header}
+    </div>
+  )
+}
+
+const List = ({
+  gridRef,
+  items,
+}: {
+  gridRef: React.RefObject<FixedSizeGrid & { _outerRef: HTMLDivElement }>
+  items: GridArray
+}) => {
   if (items.length === 0) {
     return null
   }
 
   return (
-    <FixedSizeGrid
-      ref={gridRef}
-      columnCount={items[0].length}
-      columnWidth={150}
-      height={600}
-      rowCount={items.length}
-      rowHeight={35}
-      width={600}
-      itemData={items}
-    >
-      {Cell}
-    </FixedSizeGrid>
+    <>
+      <FixedSizeGrid
+        columnCount={items[0].length}
+        columnWidth={150}
+        height={35}
+        rowCount={1}
+        rowHeight={35}
+        width={600}
+        itemData={items}
+      >
+        {Header}
+      </FixedSizeGrid>
+      <FixedSizeGrid
+        ref={gridRef}
+        columnCount={items[0].length}
+        columnWidth={150}
+        height={600}
+        rowCount={items.length - 1}
+        rowHeight={35}
+        width={600}
+        itemData={items.slice(1)}
+      >
+        {Cell}
+      </FixedSizeGrid>
+    </>
   )
 }
 

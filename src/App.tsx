@@ -6,12 +6,12 @@ import { Trade } from '@/types/types'
 
 import styles from './App.module.css'
 import List from './components/List/List'
-import useTradeData, { addTrade, deleteTrade } from './hooks/useTradeData'
+import useTradeData, { addTrade } from './hooks/useTradeData'
 
 function App() {
   const gridRef = createRef<FixedSizeGrid>()
 
-  const [tradingPair, setTradingPair] = useState('bnbbtc')
+  const [tradingPair] = useState('bnbbtc')
   const { gridState, dispatch } = useTradeData()
 
   const { lastJsonMessage } = useWebSocket(

@@ -1,4 +1,9 @@
 .app {
-  padding: 1em 0 1em 1em;
   border: 1px solid lightgray;
+}
+
+.app > h1 {
+  padding: 1em;
+  font-weight: lighter;
+  font-stretch: semi-expanded;
 }
