@@ -1,3 +1,4 @@
+import { CSSProperties, LegacyRef } from 'react'
 import { FixedSizeGrid } from 'react-window'
 
 import { GridArray } from '@/types/types'
@@ -7,7 +8,7 @@ import styles from './Grid.module.css'
 type CellProps = {
   columnIndex: number
   rowIndex: number
-  style: any
+  style: CSSProperties
   data: GridArray
 }
 
@@ -47,7 +48,13 @@ const Header = ({ columnIndex, rowIndex, style, data }: CellProps) => {
   )
 }
 
-const Grid = ({ gridRef, items }: { gridRef: any; items: GridArray }) => {
+const Grid = ({
+  gridRef,
+  items,
+}: {
+  gridRef: LegacyRef<FixedSizeGrid<(string | number)[][]>> | undefined
+  items: GridArray
+}) => {
   if (items.length === 0) {
     return null
   }

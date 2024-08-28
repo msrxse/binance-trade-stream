@@ -5,7 +5,7 @@ import { FixedSizeGrid } from 'react-window'
 import { Trade } from '@/types/types'
 
 import styles from './App.module.css'
-import Grid from './components/List/Grid'
+import Grid from './components/Grid/Grid'
 import useTradeData, { addTrade } from './hooks/useTradeData'
 
 function App() {
