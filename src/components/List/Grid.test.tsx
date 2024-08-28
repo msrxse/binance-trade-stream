@@ -33,7 +33,7 @@ describe('App', () => {
   test('displays first row correctly', () => {
     render(<Grid {...gridProps} />)
 
-    const row1Cell1 = screen.getByText(1724839665316)
+    const row1Cell1 = screen.getByText('0-1724839665316')
     const row1Cell2 = screen.getByText('0.0091')
     const row1Cell3 = screen.getByText('3.0000')
     const row1Cell4 = screen.getByText('28/08/2024, 11:07:45')

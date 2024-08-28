@@ -12,7 +12,7 @@ type CellProps = {
 }
 
 const Cell = ({ columnIndex, rowIndex, style, data }: CellProps) => {
-  const row = data[rowIndex][columnIndex]
+  const rowCell = data[rowIndex][columnIndex]
 
   return (
     <div
@@ -24,13 +24,14 @@ const Cell = ({ columnIndex, rowIndex, style, data }: CellProps) => {
       `}
       style={style}
     >
-      {row}
+      {columnIndex === 0 ? `${rowIndex}-${rowCell}` : rowCell}
+      {/* {rowCell} */}
     </div>
   )
 }
 
 const Header = ({ columnIndex, rowIndex, style, data }: CellProps) => {
-  const header = data[rowIndex][columnIndex]
+  const headerCell = data[rowIndex][columnIndex]
 
   return (
     <div
@@ -41,7 +42,7 @@ const Header = ({ columnIndex, rowIndex, style, data }: CellProps) => {
       `}
       style={style}
     >
-      {header}
+      {headerCell}
     </div>
   )
 }

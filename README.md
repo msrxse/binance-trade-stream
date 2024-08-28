@@ -53,16 +53,6 @@ The list updates in real-time as new trades come in from the WebSocket connectio
 - Tests on custom hooks made with renderHook helper from @testing-library/react.
 - This app does not use providers so this simplifies testing.
 
-## whats missing
-
-- Some `CSS` mismatches. Eg. checkbox not correct styles. Missing correctly applying font globally to the project, instead given to tags here and there.
-- Icons are not quite as in the designs
-- Missing tests, I just didn't have time for any and instead focused on accessibility since it seemed more important
-- Missing accessibility for checkboxes, also missing a good user-experience on those (user cant toggle checkboxes from the keyboard)
-- State management might not be ideal, would need a performance review on that. Looking at wasted rerenders and user experience in general
-- Proper `empty states` and `error states` are not implemented
-- Animations: There are no animations at the moment and with a little more time I could have applied them
-
 ## Tooling:
 
 - **Vite:** Frontend build tool that serves your source files over native ES modules, with rich features and fast _Hot Module Replacement (HMR)_. _Vite_ is fast because it doesn't bundle your code at all. It leverages the native support for ESM (ECMAScript Modules) of modern browsers. It sends your file directly without being bundled
