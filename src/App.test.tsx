@@ -1,10 +1,11 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 
 import App from '@/App'
 
 describe('App', () => {
-  test('should work as expected', () => {
+  test('displays title', async () => {
     render(<App />)
-    expect(screen.getByText('Vite + React')).toBeInTheDocument()
+    const title = await waitFor(() => screen.getByText('Binance Trades Stream'))
+    expect(title).toBeInTheDocument()
   })
 })

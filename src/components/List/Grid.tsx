@@ -1,19 +1,13 @@
 import { FixedSizeGrid } from 'react-window'
 
-import styles from './List.module.css'
+import { GridArray } from '@/types/types'
 
-type GridArray = (string | number)[][]
+import styles from './Grid.module.css'
 
 type CellProps = {
   columnIndex: number
   rowIndex: number
-  style: {
-    position: string
-    left: number
-    top: number
-    height: number
-    width: number
-  }
+  style: any
   data: GridArray
 }
 
@@ -22,6 +16,7 @@ const Cell = ({ columnIndex, rowIndex, style, data }: CellProps) => {
 
   return (
     <div
+      data-testid={`rowCell-${rowIndex}-${columnIndex}`}
       className={`
         ${styles.allCells}
         ${rowIndex % 2 ? styles.gridItemOdd : styles.gridItemEven}
@@ -39,6 +34,7 @@ const Header = ({ columnIndex, rowIndex, style, data }: CellProps) => {
 
   return (
     <div
+      data-testid={`headerCell-${rowIndex}-${columnIndex}`}
       className={`
         ${styles.allCells}
         ${rowIndex === 0 ? styles.headers : ''}
@@ -50,13 +46,7 @@ const Header = ({ columnIndex, rowIndex, style, data }: CellProps) => {
   )
 }
 
-const List = ({
-  gridRef,
-  items,
-}: {
-  gridRef: React.RefObject<FixedSizeGrid & { _outerRef: HTMLDivElement }>
-  items: GridArray
-}) => {
+const Grid = ({ gridRef, items }: { gridRef: any; items: GridArray }) => {
   if (items.length === 0) {
     return null
   }
@@ -90,4 +80,4 @@ const List = ({
   )
 }
 
-export default List
+export default Grid

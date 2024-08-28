@@ -2,9 +2,23 @@ type TraceDictionary = Record<string, Trade>
 
 type Trade = {
   E: number
-  p: number
+  p: string
   q: string
-  T: string
+  T: number
 }
 
-export type { Trade, TraceDictionary }
+type TradeResponse = {
+  e: string
+  E: number
+  s: string
+  t: number
+  p: string
+  q: string
+  T: number
+  m: boolean
+  M: boolean
+}
+
+type GridArray = (string | number)[][]
+
+export type { Trade, TradeResponse, TraceDictionary, GridArray }

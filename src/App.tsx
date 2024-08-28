@@ -5,7 +5,7 @@ import { FixedSizeGrid } from 'react-window'
 import { Trade } from '@/types/types'
 
 import styles from './App.module.css'
-import List from './components/List/List'
+import Grid from './components/List/Grid'
 import useTradeData, { addTrade } from './hooks/useTradeData'
 
 function App() {
@@ -40,7 +40,7 @@ function App() {
   return (
     <div className={styles.app}>
       <h1>Binance Trades Stream</h1>
-      <List gridRef={gridRef} items={gridState} />
+      <Grid gridRef={gridRef} items={gridState} />
     </div>
   )
 }
