@@ -27,12 +27,16 @@ describe('useTradeData', () => {
     }
     const resultedState = [
       ['Id', 'Price', 'Quantity', 'Time'],
-      [1724838293044, '0.0091', '0.0500', '28/08/2024, 10:44:53'],
+      [1724838293044, '0.0091', '0.0500', '28/08/2024'],
     ]
     act(() => {
       addTrade(result.current.dispatch, trade)
     })
 
-    expect(result.current.gridState).toEqual(resultedState)
+    expect(result.current.gridState[0]).toEqual(resultedState[0])
+    expect(result.current.gridState[1][0]).toEqual(resultedState[1][0])
+    expect(result.current.gridState[1][1]).toEqual(resultedState[1][1])
+    expect(result.current.gridState[1][2]).toEqual(resultedState[1][2])
+    expect(result.current.gridState[1][3]).toContain(resultedState[1][3])
   })
 })

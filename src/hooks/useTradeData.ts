@@ -1,19 +1,21 @@
 import { useReducer } from 'react'
 
+import { format } from 'date-fns-tz'
+
 import { TraceDictionary, Trade } from '@/types/types'
 
 type Action = { type: 'add'; payload: Trade } | { type: 'delete'; payload: Trade }
 type State = TraceDictionary
 type Dispatch = (action: Action) => void
 
-const format = (trade: Trade) => {
-  const date = new Date(trade['T']).toLocaleString()
+const cellFormatter = (trade: Trade) => {
+  const date = new Date(trade['T'])
 
   return {
     ...trade,
     p: Number(trade.p).toFixed(4),
     q: Number(trade.q).toFixed(4),
-    T: date,
+    T: format(date, 'dd/MM/yyyy HH:mm:ss'),
   }
 }
 
@@ -32,7 +34,7 @@ function normalizedValueReducer(state: State, action: Action): State {
 
       return {
         ...state,
-        [trade.E]: format(withFilteredProperties),
+        [trade.E]: cellFormatter(withFilteredProperties),
       }
     }
     case 'delete': {
