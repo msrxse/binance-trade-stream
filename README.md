@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Binance Trade Stream
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules. Uses Axios, react-query and MSW.
 
@@ -23,6 +23,45 @@ or
 pnpm test:watch <path-to-file>
 
 ```
+
+# About
+
+binance-trade-stream is a React application that displays trade data for the BNB/BTC trading pair from Binance.
+Connecting to its WebSocket API and receiving real-time data.
+The application displays a list of the latest trades. Each trade should display the following information:
+• Trade ID
+• Price
+• Quantity
+• Time
+The list updates in real-time as new trades come in from the WebSocket connection.
+
+# Notes
+
+## General architecture and scaffolding
+
+- Initial scaffolding is a repo of mine that I use for very small personal projects. [here](https://github.com/msrxse/default-scaffold). Removed Axios, MSW and React-query.
+- binance-trade-stream/src/App.tsx: All starts on `App.tsx` where we use react-use-websocket library to connect to Binance's trade websockets API and retrieve live data. Incomming messages get redirected to useTradeData hook, showcasing a state module fucntion (a variant of the context module function pattern). This hooks processes incomming data and internally saves its state. The exposed state in the actual data in the format that the grid will consume it.
+- About react-use-websocket library: React Hook designed to provide robust WebSocket integrations to your React Components. The App component will rerender every time the the WebSocket receives a message (which will change lastJsonMessage). Right now we are not sending messages but sendMessage could do it, and that is a memoized callback that will pass the message to the current WebSocket. Note that, useWebSocket will manage subscriptions/unsubscriptions internally. useWebSocket will keep track of how many subscribers any given WebSocket has and will automatically free it from memory once there are no subscribers remaining (a subscriber unsubscribes when it either unmounts or changes its socketUrl). So everytime we change its socketUrl, the connection will be automatically free.
+- About react-window: This is the library I use to display a grid with the incomming processed data. Its input data iss in the shape of an array or array, being each array a particular row, the first row should be the headers as it is in order. This library used windowing techniques to remove from the DOM before and after rows not visible in the window at a certain moment. Allowing resources to be freed from the browser and not blocking the user actions as the list becomes very big.
+
+## About useTradeData hook
+
+- The useTradeData custom hook implements a version of the context-module-function where I have removed the context, for simplicity. This hook exposes an API and keeps important state internal to the component, exposing only the helper functions required to make changes on the state. Those helper functions will be state, because they are exported and imported on usage, as well as the required dispatch function needed to call these helper fns.
+
+## About testing
+
+- Tests on custom hooks made with renderHook helper from @testing-library/react.
+- This app does not use providers so this simplifies testing.
+
+## whats missing
+
+- Some `CSS` mismatches. Eg. checkbox not correct styles. Missing correctly applying font globally to the project, instead given to tags here and there.
+- Icons are not quite as in the designs
+- Missing tests, I just didn't have time for any and instead focused on accessibility since it seemed more important
+- Missing accessibility for checkboxes, also missing a good user-experience on those (user cant toggle checkboxes from the keyboard)
+- State management might not be ideal, would need a performance review on that. Looking at wasted rerenders and user experience in general
+- Proper `empty states` and `error states` are not implemented
+- Animations: There are no animations at the moment and with a little more time I could have applied them
 
 ## Tooling:
 
