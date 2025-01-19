@@ -6,6 +6,8 @@ binance-trade-stream is a React application that displays trade data for the BNB
 
 Vite should have started dev server, otherwise: To start development server:
 
+![GitHub Image](binance-trade-stream.png)
+
 ```
 [npm/yarn/pnpm] run dev
 ```
