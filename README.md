@@ -8,6 +8,10 @@ Vite should have started dev server, otherwise: To start development server:
 
 ![GitHub Image](binance-trade-stream.png)
 
+
+https://github.com/user-attachments/assets/21743bf5-408a-4317-be82-6bb23f8a44ef
+
+
 ```
 [npm/yarn/pnpm] run dev
 ```
